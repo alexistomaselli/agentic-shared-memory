@@ -20,6 +20,7 @@ flowchart TD
         F1["📄 current_state.md (Estado general)"]
         F2["📂 foundations/ (Reglas del negocio)"]
         F3["📂 decisions/ (Decisiones técnicas)"]
+        F5["📂 processes/ (Módulos inamovibles)"]
         F4["📂 live/daily/ (Avance diario y sprints)"]
     end
 
@@ -49,7 +50,8 @@ flowchart TD
 Copia la carpeta `template/knowledge/` de este repositorio a tu proyecto. Esto establecerá el esqueleto base:
 
 - `live/daily/`: Buffer operativo. Aquí los agentes anotan el avance de cada sprint o sesión de manera cronológica (ej. `YYYY-MM-DD_feature-X.md`).
-- `decisions/`: ADRs (Architecture Decision Records). Para decisiones de diseño clave.
+- `decisions/`: ADRs (Architecture Decision Records). El por qué de decisiones clave (ej. naming, elección de herramientas, etc).
+- `processes/`: Módulos de negocio inamovibles y flujos operativos de la empresa (SOPs).
 - `foundations/`: Reglas de negocio core, modelo de datos, procesos funcionales.
 - `current_state.md`: Una fotografía consolidada del estado del proyecto.
 
