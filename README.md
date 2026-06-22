@@ -74,5 +74,6 @@ Copia la carpeta `template/knowledge/` de este repositorio al directorio de tu e
 
 Si usas asistentes de IA, puedes instalarles las **Skills** proveídas en este repositorio (`skills/`). Al leerlas, el agente comprenderá instantáneamente cómo debe comportarse:
 
-- `qmd-shared-memory/SKILL.md`: Para mantener la trazabilidad del trabajo diario.
+- `qmd/SKILL.md`: **Skill Fundacional.** Le enseña al agente IA qué es el motor de búsqueda local QMD y cómo usar su CLI. Indispensable como base para cualquier proyecto nuevo.
+- `qmd-shared-memory/SKILL.md`: Para mantener la trazabilidad del trabajo diario leyendo la memoria a través de QMD.
 - `asm-bootstrap/SKILL.md`: Para automatizar el "Onboarding" de una empresa (entrevista y generación automática de este repositorio).
