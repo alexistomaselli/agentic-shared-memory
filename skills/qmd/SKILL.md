@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires qmd CLI or MCP server. Install via `npm install -g @tobilu/qmd`.
 metadata:
   author: tobi
-  version: "2.0.0"
+  version: "2.0.1"
 allowed-tools: Bash(qmd:*), mcp__qmd__*
 ---
 
@@ -20,6 +20,12 @@ In this workspace, always use the dedicated index for the project (e.g. `<projec
 ```bash
 qmd --index <project-name>-asm ...
 ```
+
+## ⚠️ Tool Selection Rules (MCP vs Bash)
+> **CRITICAL RULE:** Do NOT use an MCP server that belongs to another project. 
+> 1. Use MCP tools **ONLY** if there is a server specifically named for this project (e.g., `qmd-<project-name>`).
+> 2. If the only available MCP servers belong to other projects (e.g., `qmd-afpets`), **ignore them completely**.
+> 3. If no project-specific MCP server exists, fallback to using raw Bash CLI commands (`qmd --index <project-name>-asm query "..."`).
 
 ## Status
 
