@@ -13,6 +13,18 @@ El patrón **Agentic Shared Memory** soluciona esto unificando la información d
 2. **Transferencia Tecnológica Inmediata:** Un LLM conectado a esta estructura no tiene que leer 40 páginas desordenadas; puede consultar exactamente el proceso o la decisión que necesita. Esto permite a dueños y consultores auditar y escalar la empresa de inmediato.
 3. **QMD como Cerebro Local:** Cada máquina (sea la laptop de un consultor o un servidor autónomo) corre un índice `qmd` que vectoriza este repositorio en milisegundos, permitiendo a los agentes IA consultar el "cerebro corporativo" localmente.
 
+---
+
+## 🚀 La Capa de Interacción: ASM Client Dashboard
+
+El repositorio Git sirve como "Backend" de la organización, pero las empresas y sus empleados no interactúan directamente con Git o archivos Markdown. Para ellos, el patrón ASM se integra con una **Capa de Presentación Web (El Client Dashboard)**.
+
+El ecosistema ASM completo consiste en:
+- **El Consultor/Ingeniero:** Accede al repositorio en crudo usando IDEs y consolas, trabajando directamente en Markdown.
+- **La Organización (Cliente):** Accede a una Web App (Dashboard ASM) que lee y renderiza los archivos del repositorio en una interfaz intuitiva. El dashboard posee su propio agente de Inteligencia Artificial que se comunica con el usuario en lenguaje natural, y, por detrás, edita y hace *commits* en los archivos Markdown para mantener la estructura ASM sana sin que el humano deba aprender sintaxis técnica.
+
+---
+
 ### Arquitectura Visual
 
 ```mermaid
@@ -37,14 +49,14 @@ flowchart TD
         AG1 -- Busca (qmd query) --> QMD1
     end
 
-    %% Entorno Autónomo
-    subgraph EntornoVPS ["Entorno Remoto (VPS / Operación)"]
+    %% Entorno Empresa
+    subgraph EntornoEmpresa ["Entorno Empresa (Client Dashboard)"]
         direction TB
-        QMD2[("Índice QMD Remoto")]
-        AG3["🤖 Agente Remoto Autónomo"]
+        WebApp["🖥️ Web App Dashboard"]
+        AGE["🤖 Agente Web / MCP"]
         
-        QMD2 -- Lee e Indexa --> Repo
-        AG3 -- Busca (qmd query) --> QMD2
+        WebApp -- LLM -- AGE
+        AGE -- Escribe en Git --> Repo
     end
 ```
 
@@ -60,4 +72,7 @@ Copia la carpeta `template/knowledge/` de este repositorio al directorio de tu e
 
 ## Skills para Agentes IA
 
-Si usas asistentes de IA, puedes instalarles la **Skill** proveída en este repositorio (`skills/qmd-shared-memory/SKILL.md`). Al leerla, el agente comprenderá instantáneamente cómo debe comportarse como miembro del equipo, cómo mantener la trazabilidad de su trabajo y cómo escribir o destilar información del negocio sin inventar reglas nuevas.
+Si usas asistentes de IA, puedes instalarles las **Skills** proveídas en este repositorio (`skills/`). Al leerlas, el agente comprenderá instantáneamente cómo debe comportarse:
+
+- `qmd-shared-memory/SKILL.md`: Para mantener la trazabilidad del trabajo diario.
+- `asm-bootstrap/SKILL.md`: Para automatizar el "Onboarding" de una empresa (entrevista y generación automática de este repositorio).
