@@ -1,79 +1,111 @@
 # Agentic Shared Memory (ASM)
 
-Patrón arquitectónico para la **Gestión del Conocimiento (Knowledge Management) y Memoria Descentralizada**, diseñado para digitalizar el "ADN corporativo" de una empresa y habilitar la colaboración sin fricciones entre humanos, consultores y ecosistemas multi-agente (Claude, Antigravity, OpenClaw, etc.) utilizando **Markdown**, **Git** y **QMD**.
+Patrón arquitectónico para la **gestión del conocimiento y la memoria
+descentralizada** de una empresa, usando **Markdown**, **Git** y **QMD**, de modo
+que el "ADN corporativo" sea directamente consumible tanto por humanos como por
+ecosistemas multi-agente (Claude, Antigravity, OpenClaw, etc.).
 
-## El Problema Moderno
-Actualmente, las empresas sufren de fragmentación de contexto: el histórico de decisiones, las reglas de negocio y los manuales operativos (SOPs) mueren en PDFs olvidados, plataformas como Notion/Confluence, o peor aún, están dispersos en computadoras y "cabezas distintas". 
-Esto genera una pérdida brutal de trazabilidad para la empresa y hace que cualquier integración de IA o consultoría requiera semanas de recolección de contexto manual.
+> **ASM es el componente de conocimiento del SOE.** En el entregable de cada
+> empresa, ASM vive como la carpeta `knowledge/` dentro del repositorio
+> `<empresa>-soe`. Ver la
+> [Metodología SOE](https://github.com/alexistomaselli/metodologia-soe).
 
-## La Solución (ASM)
-El patrón **Agentic Shared Memory** soluciona esto unificando la información de la empresa bajo un estándar auditable y directamente "consumible" por cualquier inteligencia artificial o humano.
+## El problema
 
-1. **Markdown como Fuente de Verdad:** Todo el conocimiento de la empresa (procesos inamovibles, decisiones técnicas, bitácoras operativas) se guarda en archivos `.md` planos versionados en un repositorio Git. 
-2. **Transferencia Tecnológica Inmediata:** Un LLM conectado a esta estructura no tiene que leer 40 páginas desordenadas; puede consultar exactamente el proceso o la decisión que necesita. Esto permite a dueños y consultores auditar y escalar la empresa de inmediato.
-3. **QMD como Cerebro Local:** Cada máquina (sea la laptop de un consultor o un servidor autónomo) corre un índice `qmd` que vectoriza este repositorio en milisegundos, permitiendo a los agentes IA consultar el "cerebro corporativo" localmente.
+Las empresas sufren fragmentación de contexto: el histórico de decisiones, las
+reglas de negocio y los manuales operativos (SOPs) mueren en PDFs olvidados, en
+Notion/Confluence, o peor, dispersos en computadoras y "cabezas distintas". Esto
+genera pérdida de trazabilidad y hace que cualquier integración de IA o
+consultoría requiera semanas de recolección de contexto manual.
 
----
+## La solución: el patrón ASM
 
-## 🚀 La Capa de Interacción: ASM Client Dashboard
+ASM unifica la información de la empresa bajo un estándar auditable y consumible
+por cualquier inteligencia (humana o artificial).
 
-El repositorio Git sirve como "Backend" de la organización, pero las empresas y sus empleados no interactúan directamente con Git o archivos Markdown. Para ellos, el patrón ASM se integra con una **Capa de Presentación Web (El Client Dashboard)**.
+1. **Markdown como fuente de verdad.** Todo el conocimiento (procesos, decisiones,
+   reglas, bitácoras) se guarda en archivos `.md` planos versionados en Git.
+2. **Transferencia inmediata.** Un LLM conectado no lee 40 páginas desordenadas:
+   consulta exactamente el proceso o la decisión que necesita.
+3. **QMD como cerebro local.** Cada máquina corre un índice `qmd` que vectoriza el
+   repositorio en milisegundos, permitiendo a los agentes consultar el "cerebro
+   corporativo" localmente.
 
-El ecosistema ASM completo consiste en:
-- **El Consultor/Ingeniero:** Accede al repositorio en crudo usando IDEs y consolas, trabajando directamente en Markdown.
-- **La Organización (Cliente):** Accede a una Web App (Dashboard ASM) que lee y renderiza los archivos del repositorio en una interfaz intuitiva. El dashboard posee su propio agente de Inteligencia Artificial que se comunica con el usuario en lenguaje natural, y, por detrás, edita y hace *commits* en los archivos Markdown para mantener la estructura ASM sana sin que el humano deba aprender sintaxis técnica.
+## Estructura de la memoria (Knowledge Loop)
 
----
+El patrón ASM define el esqueleto de `knowledge/`. Copia `template/knowledge/`
+dentro del repositorio `<empresa>-soe`:
 
-### Arquitectura Visual
+- `current_state.md`: fotografía consolidada del estado actual de la operación.
+- `foundations/`: reglas de negocio core y modelo (lo estable).
+- `decisions/`: ADRs — el histórico inmutable del *por qué*.
+- `processes/`: SOPs y flujos operativos inamovibles. **Aquí vive cómo opera la empresa.**
+- `live/`: buffer operativo (bitácora viva diaria; `live/daily/`, `live/sessions/`, `live/inbox/`).
+
+> **Regla de oro:** si la información no está en los archivos Markdown (y por lo
+> tanto en Git), no existe para el resto del ecosistema multi-agente.
+
+## Skills para agentes de IA
+
+Las **Skills** de este repositorio (`skills/`) le enseñan a un agente cómo
+comportarse:
+
+- `qmd/SKILL.md`: **fundacional.** Qué es el motor de búsqueda local QMD y cómo
+  usar su CLI. Base para cualquier proyecto.
+- `qmd-shared-memory/SKILL.md`: mantener la trazabilidad del trabajo diario
+  leyendo la memoria a través de QMD.
+- `asm-bootstrap/SKILL.md`: sembrar la estructura `knowledge/` de una empresa
+  (entrevista de onboarding y generación de los archivos semilla).
+
+## Cómo se consume: interfaces
+
+El repositorio Git es el "backend" del conocimiento. Hay dos formas de consumirlo:
+
+- **El consultor / ingeniero** accede al repositorio en crudo con IDEs y consola,
+  trabajando directamente en Markdown.
+- **La organización (cliente)** accede a través de una **capa de presentación web
+  (Client Dashboard)** que renderiza los archivos en una interfaz intuitiva. El
+  dashboard tiene su propio agente de IA que conversa en lenguaje natural y, por
+  detrás, edita y commitea los Markdown manteniendo la estructura ASM sana.
+
+> El **Client Dashboard es un producto/interfaz**, no parte del estándar de
+> conocimiento. El patrón ASM (Markdown + Git + QMD + template + skills) funciona
+> con o sin dashboard.
+
+### Arquitectura
 
 ```mermaid
 flowchart TD
-    %% Base de Conocimiento Centralizada
-    subgraph Repo ["Repositorio del Proyecto / ADN Empresa (Git)"]
+    subgraph Repo ["<empresa>-soe / knowledge/ (Git)"]
         direction TB
-        F1["📄 current_state.md (Estado general de la organización)"]
-        F2["📂 foundations/ (Reglas de negocio y modelo)"]
-        F3["📂 decisions/ (Histórico del 'Por qué')"]
-        F5["📂 processes/ (Manuales operativos inamovibles / SOPs)"]
-        F4["📂 live/daily/ (Bitácora de avance diario y sprints)"]
+        F1["📄 current_state.md"]
+        F2["📂 foundations/ (reglas y modelo)"]
+        F3["📂 decisions/ (ADRs: el porqué)"]
+        F5["📂 processes/ (SOPs)"]
+        F4["📂 live/ (bitácora viva)"]
     end
 
-    %% Entorno Consultor / Local
-    subgraph EntornoLocal ["Entorno Local (Humano / Consultor)"]
+    subgraph EntornoLocal ["Entorno local (consultor)"]
         direction TB
-        QMD1[("Índice QMD Local")]
-        AG1["🤖 Agente IDE Local / LLM"]
-        
-        QMD1 -- Lee e Indexa --> Repo
-        AG1 -- Busca (qmd query) --> QMD1
+        QMD1[("Índice QMD local")]
+        AG1["🤖 Agente IDE / LLM"]
+        QMD1 -- Lee e indexa --> Repo
+        AG1 -- qmd query --> QMD1
     end
 
-    %% Entorno Empresa
-    subgraph EntornoEmpresa ["Entorno Empresa (Client Dashboard)"]
+    subgraph EntornoEmpresa ["Entorno empresa (Client Dashboard · producto)"]
         direction TB
         WebApp["🖥️ Web App Dashboard"]
         AGE["🤖 Agente Web / MCP"]
-        
-        WebApp -- LLM -- AGE
+        WebApp -- LLM --- AGE
         AGE -- Escribe en Git --> Repo
     end
 ```
 
-## Estructura de la Memoria (Knowledge Loop)
+## Setup rápido
 
-Copia la carpeta `template/knowledge/` de este repositorio al directorio de tu empresa o proyecto para establecer el esqueleto de conocimiento:
-
-- `live/daily/`: Buffer operativo. Aquí los humanos o agentes anotan el avance de cada sprint o sesión cronológicamente (ej. `YYYY-MM-DD_feature-X.md`).
-- `decisions/`: ADRs (Architecture Decision Records). El histórico inmutable del *por qué* de decisiones clave (naming de la empresa, elección de herramientas, etc).
-- `processes/`: Módulos de negocio inamovibles y flujos operativos (SOPs). **Aquí es donde vive cómo opera la empresa.**
-- `foundations/`: Reglas de negocio core y procesos funcionales estables.
-- `current_state.md`: Una fotografía consolidada del estado actual de la operación.
-
-## Skills para Agentes IA
-
-Si usas asistentes de IA, puedes instalarles las **Skills** proveídas en este repositorio (`skills/`). Al leerlas, el agente comprenderá instantáneamente cómo debe comportarse:
-
-- `qmd/SKILL.md`: **Skill Fundacional.** Le enseña al agente IA qué es el motor de búsqueda local QMD y cómo usar su CLI. Indispensable como base para cualquier proyecto nuevo.
-- `qmd-shared-memory/SKILL.md`: Para mantener la trazabilidad del trabajo diario leyendo la memoria a través de QMD.
-- `asm-bootstrap/SKILL.md`: Para automatizar el "Onboarding" de una empresa (entrevista y generación automática de este repositorio).
+```bash
+npm install -g @tobilu/qmd
+qmd --index <empresa>-soe collection add docs ./knowledge/
+qmd --index <empresa>-soe embed
+```
