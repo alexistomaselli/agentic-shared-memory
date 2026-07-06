@@ -4,6 +4,7 @@ Esta carpeta actúa como memoria centralizada para todos los agentes de IA que t
 
 ## Estructura
 - `current_state.md`: Estado actual del proyecto.
+- `fuentes/`: Material **crudo** de relevamiento (reuniones, documentos, capturas). Permanente; de acá se destilan requerimientos. No se migra como `live/`.
 - `foundations/`: Reglas de negocio y modelo core.
 - `decisions/`: ADRs (decisiones en general, naming, arquitecturas).
 - `processes/`: Definiciones de la empresa y módulos de negocio inamovibles (SOPs).
