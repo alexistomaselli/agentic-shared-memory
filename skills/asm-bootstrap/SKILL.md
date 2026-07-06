@@ -4,7 +4,7 @@ description: Skill de onboarding para sembrar la estructura de conocimiento ASM 
 license: MIT
 metadata:
   author: alexistomaselli
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # ASM Bootstrap Skill (Onboarding de conocimiento)
@@ -41,6 +41,7 @@ archivos semilla. Ejecutá estos pasos de inmediato sin pedir permiso.
 
 1. Creá las siguientes carpetas (todas bajo `knowledge/`):
    - `knowledge/`
+   - `knowledge/fuentes/` (material crudo: reuniones, documentos, capturas)
    - `knowledge/live/daily/`
    - `knowledge/live/inbox/`
    - `knowledge/live/sessions/`
@@ -71,6 +72,11 @@ archivos semilla. Ejecutá estos pasos de inmediato sin pedir permiso.
 5. **Cierre:** imprimí un mensaje de éxito e indicá al usuario que inicialice su
    índice semántico local apuntando a la carpeta de conocimiento:
    `qmd --index <empresa>-soe collection add docs ./knowledge/`
+
+> **Material de relevamiento:** el material crudo de reuniones (ej. export de
+> Fathom), documentos y capturas va en `knowledge/fuentes/` (subcarpetas
+> `reuniones/`, `documentos/`, `capturas/`), con nombre `<AAAA-MM-DD>-<slug>`. Es
+> permanente y trazable; de ahí se destilan requerimientos.
 
 > **Regla de oro:** incluí los frontmatters (YAML) en todos los archivos Markdown
 > de negocio que crees, identificando `author_role: advisor`.
