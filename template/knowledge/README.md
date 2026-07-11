@@ -8,7 +8,6 @@ Esta carpeta actúa como memoria centralizada para todos los agentes de IA que t
 - `foundations/`: Reglas de negocio y modelo core.
 - `decisions/`: ADRs (decisiones en general, naming, arquitecturas).
 - `processes/`: Definiciones de la empresa y módulos de negocio inamovibles (SOPs).
-- `fuentes/`: Material crudo de relevamiento recibido (reuniones, documentos, capturas).
 - `comercial/`: Artefactos de la relación producidos/enviados (propuestas, acuerdos, aceptaciones).
 - `live/`: Buffer operativo (memoria viva). Incluye `daily/` (bitácora diaria) y `hitos.md` (línea de hitos).
 
